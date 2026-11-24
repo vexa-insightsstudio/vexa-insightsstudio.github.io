@@ -113,7 +113,7 @@ const UI = {
     const headerHTML = `
       <header class="sticky top-0 z-40 border-b border-white/[0.08] bg-[#09090B]/85 backdrop-blur-xl">
         <div class="mx-auto flex h-16 max-w-7xl items-center gap-6 px-4 sm:px-6 lg:px-8">
-          <a href="./index.html" aria-label="Vexa Insights Studio — Home" class="group flex shrink-0 items-center rounded-lg">
+          <a href="./index" aria-label="Vexa Insights Studio — Home" class="group flex shrink-0 items-center rounded-lg">
             <img 
               src="./assets/full-logo.png" 
               alt="Vexa Insights Studio" 
@@ -122,13 +122,13 @@ const UI = {
           </a>
 
           <nav class="hidden flex-1 items-center gap-1.5 md:flex">
-            <a href="./index.html" class="rounded-full px-4 py-2 text-sm font-medium transition-colors ${activePage === 'explore' ? 'bg-white/10 text-white' : 'text-zinc-400 hover:text-white'}">Explore</a>
-            <a href="./marketplace.html" class="rounded-full px-4 py-2 text-sm font-medium transition-colors ${activePage === 'marketplace' ? 'bg-white/10 text-white' : 'text-zinc-400 hover:text-white'}">Marketplace</a>
-            <a href="./studio.html" class="rounded-full px-4 py-2 text-sm font-medium transition-colors ${activePage === 'studio' ? 'bg-white/10 text-white' : 'text-zinc-400 hover:text-white'}">Creator Studio</a>
+            <a href="./" class="rounded-full px-4 py-2 text-sm font-medium transition-colors ${activePage === 'explore' ? 'bg-white/10 text-white' : 'text-zinc-400 hover:text-white'}">Explore</a>
+            <a href="./marketplace" class="rounded-full px-4 py-2 text-sm font-medium transition-colors ${activePage === 'marketplace' ? 'bg-white/10 text-white' : 'text-zinc-400 hover:text-white'}">Marketplace</a>
+            <a href="./studio" class="rounded-full px-4 py-2 text-sm font-medium transition-colors ${activePage === 'studio' ? 'bg-white/10 text-white' : 'text-zinc-400 hover:text-white'}">Creator Studio</a>
           </nav>
 
           <div class="ml-auto flex items-center gap-2.5">
-            <a href="./vault.html" aria-label="Saved Vault" class="relative hidden h-10 w-10 place-items-center rounded-full border border-white/10 text-zinc-300 transition-colors hover:border-violet-500/50 hover:text-white md:grid">
+            <a href="./vault" aria-label="Saved Vault" class="relative hidden h-10 w-10 place-items-center rounded-full border border-white/10 text-zinc-300 transition-colors hover:border-violet-500/50 hover:text-white md:grid">
               <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
               <span id="nav-vault-badge" class="hidden absolute -right-1 -top-1 h-4 min-w-[16px] rounded-full bg-violet-600 px-1 text-center font-mono text-[10px] font-bold leading-4 text-white">0</span>
             </a>
@@ -142,7 +142,7 @@ const UI = {
       <footer class="mt-24 border-t border-white/[0.08] bg-[#09090B]">
         <div class="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr] lg:px-8">
           <div>
-            <a href="./index.html" class="inline-flex items-center">
+            <a href="./index" class="inline-flex items-center">
               <img 
                 src="./assets/full-logo.png" 
                 alt="Vexa Insights Studio" 
@@ -160,10 +160,10 @@ const UI = {
           <div>
             <p class="font-mono text-xs uppercase tracking-widest text-zinc-500">Navigation</p>
             <ul class="mt-4 space-y-2.5 text-sm">
-              <li><a href="./index.html" class="text-zinc-400 hover:text-white">Explore Hub</a></li>
-              <li><a href="./marketplace.html" class="text-zinc-400 hover:text-white">Asset Marketplace</a></li>
-              <li><a href="./studio.html" class="text-zinc-400 hover:text-white">Creator Studio (Upload)</a></li>
-              <li><a href="./vault.html" class="text-zinc-400 hover:text-white">Saved Vault</a></li>
+              <li><a href="./index" class="text-zinc-400 hover:text-white">Explore Hub</a></li>
+              <li><a href="./marketplace" class="text-zinc-400 hover:text-white">Asset Marketplace</a></li>
+              <li><a href="./studio" class="text-zinc-400 hover:text-white">Creator Studio (Upload)</a></li>
+              <li><a href="./vault" class="text-zinc-400 hover:text-white">Saved Vault</a></li>
             </ul>
           </div>
 
@@ -189,7 +189,7 @@ const UI = {
                 </a>
               </li>
               <li>
-                <a href="./index.html" class="group inline-flex items-center gap-2.5 font-medium text-white transition-colors hover:text-violet-400">
+                <a href="./index" class="group inline-flex items-center gap-2.5 font-medium text-white transition-colors hover:text-violet-400">
                   <img src="./assets/logo-insightsstudio.png" alt="InsightsStudio" class="h-5 w-5 rounded object-contain transition-transform group-hover:scale-110" />
                   <span>InsightsStudio</span>
                 </a>
@@ -211,25 +211,25 @@ const UI = {
       <nav class="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-[#09090B]/95 backdrop-blur-xl md:hidden">
         <ul class="grid grid-cols-4">
           <li>
-            <a href="./index.html" class="flex h-16 flex-col items-center justify-center gap-1 text-[11px] font-medium ${activePage === 'explore' ? 'text-violet-400' : 'text-zinc-400'}">
+            <a href="./" class="flex h-16 flex-col items-center justify-center gap-1 text-[11px] font-medium ${activePage === 'explore' ? 'text-violet-400' : 'text-zinc-400'}">
               <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
               Explore
             </a>
           </li>
           <li>
-            <a href="./marketplace.html" class="flex h-16 flex-col items-center justify-center gap-1 text-[11px] font-medium ${activePage === 'marketplace' ? 'text-violet-400' : 'text-zinc-400'}">
+            <a href="./marketplace" class="flex h-16 flex-col items-center justify-center gap-1 text-[11px] font-medium ${activePage === 'marketplace' ? 'text-violet-400' : 'text-zinc-400'}">
               <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
               Market
             </a>
           </li>
           <li>
-            <a href="./studio.html" class="flex h-16 flex-col items-center justify-center gap-1 text-[11px] font-medium ${activePage === 'studio' ? 'text-violet-400' : 'text-zinc-400'}">
+            <a href="./studio" class="flex h-16 flex-col items-center justify-center gap-1 text-[11px] font-medium ${activePage === 'studio' ? 'text-violet-400' : 'text-zinc-400'}">
               <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
               Studio
             </a>
           </li>
           <li>
-            <a href="./vault.html" class="flex h-16 flex-col items-center justify-center gap-1 text-[11px] font-medium ${activePage === 'vault' ? 'text-violet-400' : 'text-zinc-400'}">
+            <a href="./vault" class="flex h-16 flex-col items-center justify-center gap-1 text-[11px] font-medium ${activePage === 'vault' ? 'text-violet-400' : 'text-zinc-400'}">
               <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
               Vault
             </a>
