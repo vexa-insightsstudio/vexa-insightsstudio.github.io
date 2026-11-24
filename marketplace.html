@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marketplace — Vexa-InsightsStudio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="./css/style.css" />
+
+  <!-- Favicon & App Icon -->
+  <link rel="icon" href="./assets/logo.png" type="image/png" />
+  <link rel="apple-touch-icon" href="./assets/logo.png" />
+
+  <!-- Thumbnail saat link web dibagikan (WhatsApp / Sosial Media) -->
+  <meta property="og:title" content="Vexa-InsightsStudio — Creative Ecosystem Hub" />
+  <meta property="og:description" content="Curated inspiration and digital assets for web, film, and sound creators." />
+  <meta property="og:image" content="./assets/og-banner.jpg" />
+</head>
+<body class="pb-20 md:pb-0">
+
+  <main class="mx-auto max-w-7xl px-4 pt-10 sm:px-6 lg:px-8">
+    <div class="border-b border-white/10 pb-8">
+      <p class="font-mono text-xs uppercase tracking-widest text-violet-400">Digital Asset Store</p>
+      <h1 class="mt-2 text-3xl font-extrabold text-white">Marketplace Aset Kreator</h1>
+      <p class="mt-2 text-sm text-zinc-400">Filter berdasarkan cabang studio dan tipe lisensi (Free & Pro).</p>
+
+      <!-- Filter Bar -->
+      <div class="mt-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+        <div class="no-scrollbar flex gap-2 overflow-x-auto">
+          <select id="filter-studio" onchange="renderMarket()" class="rounded-xl border border-white/15 bg-[#121216] px-3.5 py-2.5 text-xs font-semibold text-white outline-none">
+            <option value="all">Semua Kategori Studio</option>
+            <option value="web">Web & App (WebStudio)</option>
+            <option value="film">Film & Editing (FilmStudio)</option>
+            <option value="sound">Sound Build (EchoStudio)</option>
+          </select>
+
+          <select id="filter-license" onchange="renderMarket()" class="rounded-xl border border-white/15 bg-[#121216] px-3.5 py-2.5 text-xs font-semibold text-white outline-none">
+            <option value="all">Semua Lisensi (Free & Pro)</option>
+            <option value="free">Gratis (Free)</option>
+            <option value="pro">Berbayar (Pro)</option>
+          </select>
+        </div>
+
+        <input id="market-search" oninput="renderMarket()" type="text" placeholder="Filter nama aset atau kreator..." class="w-full rounded-xl border border-white/15 bg-[#121216] px-4 py-2.5 text-xs text-white outline-none focus:border-violet-500 md:w-72" />
+      </div>
+    </div>
+
+    <div id="market-grid" class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
+  </main>
+
+  <script src="./js/data.js"></script>
+  <script src="./js/app.js"></script>
+  <script>
+    UI.init('marketplace');
+
+    function renderMarket() {
+      const studio = document.getElementById('filter-studio').value;
+      const license = document.getElementById('filter-license').value;
+      const q = document.getElementById('market-search').value.toLowerCase();
+
+      const items = Storage.getAssets().filter(a => {
+        const matchStudio = studio === 'all' || a.category === studio;
+        const matchLicense = license === 'all' || a.type === license;
+        const matchQ = a.title.toLowerCase().includes(q) || a.creator.toLowerCase().includes(q);
+        return matchStudio && matchLicense && matchQ;
+      });
+
+      const grid = document.getElementById('market-grid');
+      grid.innerHTML = items.length
+        ? items.map(a => UI.renderCard(a)).join('')
+        : `<p class="col-span-full py-12 text-center text-sm text-zinc-500">Tidak ada aset yang cocok dengan filter tersebut.</p>`;
+    }
+
+    renderMarket();
+  </script>
+</body>
+</html>

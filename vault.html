@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saved Vault — Vexa-InsightsStudio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="./css/style.css" />
+
+  <!-- Favicon & App Icon -->
+  <link rel="icon" href="./assets/logo.png" type="image/png" />
+  <link rel="apple-touch-icon" href="./assets/logo.png" />
+
+  <!-- Thumbnail saat link web dibagikan (WhatsApp / Sosial Media) -->
+  <meta property="og:title" content="Vexa-InsightsStudio — Creative Ecosystem Hub" />
+  <meta property="og:description" content="Curated inspiration and digital assets for web, film, and sound creators." />
+  <meta property="og:image" content="./assets/og-banner.jpg" />
+</head>
+<body class="pb-20 md:pb-0">
+
+  <main class="mx-auto max-w-7xl px-4 pt-10 sm:px-6 lg:px-8">
+    <p class="font-mono text-xs uppercase tracking-widest text-violet-400">Personal Library</p>
+    <h1 class="mt-2 text-3xl font-extrabold text-white">Your Vexa Vault</h1>
+
+    <!-- Purchased Assets -->
+    <section class="mt-8">
+      <h2 class="text-lg font-bold text-white">Aset Dimiliki & Siap Diunduh</h2>
+      <div id="purchased-grid" class="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
+    </section>
+
+    <!-- Saved Bookmarks -->
+    <section class="mt-14 border-t border-white/10 pt-10">
+      <h2 class="text-lg font-bold text-white">Saved Inspirations (Bookmark)</h2>
+      <div id="saved-grid" class="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
+    </section>
+  </main>
+
+  <script src="./js/data.js"></script>
+  <script src="./js/app.js"></script>
+  <script>
+    UI.init('vault');
+
+    const allAssets = Storage.getAssets();
+    const purchasedIds = Storage.getPurchasedIds();
+    const savedIds = Storage.getSavedIds();
+
+    const purchasedItems = allAssets.filter(a => purchasedIds.includes(a.id));
+    const savedItems = allAssets.filter(a => savedIds.includes(a.id));
+
+    document.getElementById('purchased-grid').innerHTML = purchasedItems.length
+      ? purchasedItems.map(a => UI.renderCard(a)).join('')
+      : `<p class="col-span-full rounded-2xl border border-white/10 bg-[#121216] p-6 text-xs text-zinc-400">Belum ada aset yang dibeli/diunduh. Jelajahi Marketplace untuk mulai mengoleksi.</p>`;
+
+    document.getElementById('saved-grid').innerHTML = savedItems.length
+      ? savedItems.map(a => UI.renderCard(a)).join('')
+      : `<p class="col-span-full rounded-2xl border border-white/10 bg-[#121216] p-6 text-xs text-zinc-400">Belum ada aset yang di-bookmark. Klik ikon bintang (☆) pada kartu aset untuk menyimpannya di sini.</p>`;
+  </script>
+</body>
+</html>

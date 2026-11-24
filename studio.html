@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Creator Studio — Vexa-InsightsStudio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="./css/style.css" />
+
+  <!-- Favicon & App Icon -->
+  <link rel="icon" href="./assets/logo.png" type="image/png" />
+  <link rel="apple-touch-icon" href="./assets/logo.png" />
+
+  <!-- Thumbnail saat link web dibagikan (WhatsApp / Sosial Media) -->
+  <meta property="og:title" content="Vexa-InsightsStudio — Creative Ecosystem Hub" />
+  <meta property="og:description" content="Curated inspiration and digital assets for web, film, and sound creators." />
+  <meta property="og:image" content="./assets/og-banner.jpg" />
+</head>
+<body class="pb-20 md:pb-0">
+
+  <main class="mx-auto max-w-3xl px-4 pt-10 sm:px-6 lg:px-8">
+    <span class="rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 font-mono text-xs text-violet-300">CREATOR STUDIO</span>
+    <h1 class="mt-3 text-3xl font-extrabold text-white">Publikasikan Aset Digital</h1>
+    <p class="mt-1.5 text-sm text-zinc-400">Aset yang kamu unggah akan langsung tampil di halaman Explore dan Marketplace.</p>
+
+    <form onsubmit="publishAsset(event)" class="mt-8 space-y-5 rounded-3xl border border-white/10 bg-[#121216] p-6 sm:p-8">
+      <!-- Drag & Drop Visual Zone -->
+      <div class="rounded-2xl border-2 border-dashed border-white/15 bg-zinc-950/60 p-6 text-center">
+        <p class="text-sm font-semibold text-white">Drop file paket aset (.ZIP, .FIG, .CUBE, .WAV)</p>
+        <p class="mt-1 font-mono text-xs text-zinc-500">Maksimal 500MB · Simulasi Upload Frontend</p>
+        <input type="file" class="mt-3 text-xs text-zinc-400 file:mr-3 file:rounded-full file:border-0 file:bg-violet-600 file:px-4 file:py-1.5 file:text-xs file:font-semibold file:text-white" />
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label class="block text-xs font-semibold text-zinc-300">Judul Aset</label>
+          <input id="up-title" type="text" required placeholder="Contoh: Minimalist Dashboard UI Kit" class="mt-1.5 w-full rounded-xl border border-white/10 bg-zinc-900 px-3.5 py-2.5 text-sm text-white outline-none focus:border-violet-500" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-zinc-300">Kategori Studio</label>
+          <select id="up-cat" class="mt-1.5 w-full rounded-xl border border-white/10 bg-zinc-900 px-3.5 py-2.5 text-sm text-white outline-none focus:border-violet-500">
+            <option value="web">Web & App (WebStudio)</option>
+            <option value="film">Film & Editing (FilmStudio)</option>
+            <option value="sound">Sound Build (EchoStudio)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label class="block text-xs font-semibold text-zinc-300">Format File</label>
+          <input id="up-format" type="text" required placeholder="Contoh: .FIG / .HTML" class="mt-1.5 w-full rounded-xl border border-white/10 bg-zinc-900 px-3.5 py-2.5 font-mono text-xs text-white outline-none focus:border-violet-500" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-zinc-300">Harga (IDR — isi 0 untuk Gratis)</label>
+          <input id="up-price" type="number" min="0" step="1000" value="0" required class="mt-1.5 w-full rounded-xl border border-white/10 bg-zinc-900 px-3.5 py-2.5 font-mono text-sm text-white outline-none focus:border-violet-500" />
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-xs font-semibold text-zinc-300">Deskripsi & Kegunaan</label>
+        <textarea id="up-desc" rows="3" required placeholder="Jelaskan fitur utama aset ini untuk kreator lain..." class="mt-1.5 w-full rounded-xl border border-white/10 bg-zinc-900 px-3.5 py-2.5 text-sm text-white outline-none focus:border-violet-500"></textarea>
+      </div>
+
+      <button type="submit" class="w-full rounded-full bg-violet-600 py-3.5 text-sm font-bold text-white shadow-glow transition hover:bg-violet-500">
+        Terbitkan ke Marketplace Sekarang
+      </button>
+    </form>
+  </main>
+
+  <script src="./js/data.js"></script>
+  <script src="./js/app.js"></script>
+  <script>
+    UI.init('studio');
+
+    function publishAsset(e) {
+      e.preventDefault();
+      const cat = document.getElementById('up-cat').value;
+      const price = Number(document.getElementById('up-price').value);
+      const user = Storage.getUser();
+
+      const tagMap = { web: 'Web & App', film: 'Film & Editing', sound: 'Sound Build' };
+      const gradMap = {
+        web: 'from-violet-600/35 via-indigo-900/40 to-zinc-950',
+        film: 'from-orange-600/35 via-rose-900/40 to-zinc-950',
+        sound: 'from-emerald-600/35 via-teal-900/40 to-zinc-950'
+      };
+
+      const newAsset = {
+        id: 'custom-' + Date.now(),
+        title: document.getElementById('up-title').value.trim(),
+        creator: user ? user.name : 'Vexa Creator',
+        studioTag: tagMap[cat],
+        category: cat,
+        type: price === 0 ? 'free' : 'pro',
+        price,
+        rating: 5.0,
+        downloads: 1,
+        format: document.getElementById('up-format').value.trim().toUpperCase(),
+        size: '32.0 MB',
+        gradient: gradMap[cat],
+        description: document.getElementById('up-desc').value.trim(),
+        specs: ['Verified Vexaro Standard', 'Instant Digital Delivery', 'Commercial & Personal Use'],
+        reviews: []
+      };
+
+      Storage.addCustomAsset(newAsset);
+      UI.toast('Aset berhasil diterbitkan! Mengalihkan ke Marketplace...');
+      setTimeout(() => window.location.href = './marketplace.html', 900);
+    }
+  </script>
+</body>
+</html>
